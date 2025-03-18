@@ -1,6 +1,10 @@
 import {serve} from '@hono/node-server'
 import {Hono} from 'hono'
 import {logger} from 'hono/logger';
+import * as dotenv from 'dotenv'
+
+// Load environment variables from the .env file
+dotenv.config()
 
 const app = new Hono()
 
