@@ -1,9 +1,6 @@
 import {decimal, index, pgTable, text, timestamp, uuid} from 'drizzle-orm/pg-core'
-import * as dotenv from 'dotenv';
 import {drizzle} from 'drizzle-orm/node-postgres';
-import type {InferSelectModel} from "drizzle-orm";
-
-dotenv.config();
+import env from "../utils/env";
 
 
 // Define the user table schema
@@ -54,6 +51,6 @@ export const transactions = pgTable('transactions', {
 
 
 
-const db = drizzle(process.env.DATABASE_URL!);
+const db = drizzle(env.DATABASE_URL);
 
 export {db};

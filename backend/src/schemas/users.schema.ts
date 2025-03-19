@@ -1,5 +1,8 @@
 import {z} from "zod";
 
+/**
+ * Schema for creating a new user.
+ */
 export const createUserSchemaDto = z.object({
     name: z.string().min(1, "Name is required").max(144, "Name is too long"),
     username: z.string().min(6, "Username must be at least 6 characters long").max(144, "Username is too long"),

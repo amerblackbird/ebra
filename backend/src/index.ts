@@ -5,7 +5,6 @@ import {compress} from 'hono/compress'
 import {rateLimiter} from 'hono-rate-limiter';
 
 import env from "./utils/env";
-
 import routes from "./routes";
 import {errorHandler} from './utils/errors';
 
@@ -15,6 +14,7 @@ const app = new Hono()
 
 // Add middlewares
 app.use('*', logger()); // Use the logger middleware
+
 app.use(compress()) // Use the compress middleware
 
 // Apply rate limiter globally
@@ -34,8 +34,6 @@ app.route('/api/v1', routes);
 // Errors handling
 app.onError(errorHandler)
 
-
-// Todo: Read from env
 serve({
     fetch: app.fetch,
     port: env.PORT
