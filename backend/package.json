@@ -6,9 +6,11 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.13.8",
+    "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.40.1",
     "hono": "^4.7.4",
+    "hono-rate-limiter": "^0.4.2",
     "pg": "^8.14.1",
     "zod": "^3.24.2"
   },

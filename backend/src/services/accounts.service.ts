@@ -1,6 +1,6 @@
-import {eq} from "drizzle-orm";
+import {and, eq} from "drizzle-orm";
 
-import type {CreateUserDto} from "../schemas/usersSchema";
+import type {CreateUserDto} from "../schemas/users.schema";
 import {db, logins, users, wallets} from "../db/schema";
 import {PasswordUtils} from "../utils/password";
 import {ExceptionModel} from "../models/exception";
@@ -15,12 +15,17 @@ export class AccountsService {
 
         const {username, email, name, password} = dto;
 
+        // Check if the email is already registere
+        const existsEmail = await this.findOneByEmailAndRole(email, "user");
+        if (existsEmail) {
+            throw new ExceptionModel(ERROR_CODES.EMAIL_ALREADY_REGISTERED)
+        }
+
         const existsUser = await this.findOneByUsername(username)
 
         if (existsUser) {
             throw new ExceptionModel(ERROR_CODES.USERNAME_ALREADY_REGISTERED)
         }
-
 
         // Hash the password
         const salt = PasswordUtils.getSalt();
@@ -60,6 +65,16 @@ export class AccountsService {
 
     async findOneByUsername(username: string) {
         const existing = await db.select().from(users).where(eq(users.username, username)).execute();
+        return existing.length > 0 ? existing[0] : undefined;
+    }
+
+    async findOneByEmailAndRole(email: string, role: string) {
+        const existing = await db.select().from(users).where(and(eq(users.email, email), eq(users.role, role))).execute();
+        return existing.length > 0 ? existing[0] : undefined;
+    }
+
+    async findLoginByUserId(userId: string) {
+        const existing = await db.select().from(logins).where(eq(logins.userId, userId)).execute();
         return existing.length > 0 ? existing[0] : undefined;
     }
 

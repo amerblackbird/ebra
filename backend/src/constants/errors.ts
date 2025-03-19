@@ -18,6 +18,28 @@ const ERROR_CODES = {
      * Username already exists.
      */
     USERNAME_ALREADY_REGISTERED: "USERNAME_ALREADY_REGISTERED",
+
+    /**
+     * Email already exists.
+     */
+    EMAIL_ALREADY_REGISTERED: "EMAIL_ALREADY_REGISTERED",
+
+    /**
+     * Invalid username or password.
+     */
+    INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
+
+    /**
+     * User not found.
+     */
+    USER_NOT_FOUND: "USER_NOT_FOUND",
+
+
+    /**
+     * Unauthorized access.
+     */
+    UNAUTHORIZED_ACCESS: "UNAUTHORIZED_ACCESS"
+
 }
 
 export default ERROR_CODES;

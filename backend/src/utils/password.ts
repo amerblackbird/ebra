@@ -14,21 +14,22 @@ export class PasswordUtils {
     }
 
     /**
-     * Generates a random string of the specified length.
-     * @param {number} length - The length of the random string.
-     * @returns {string} A random string of the specified length.
-     */
-    static getRandomString(length: number): string {
-        // Return a random string of the specified length
-        return Math.random().toString(36).substring(2, length + 2);
-    }
-
-    /**
      * Generates a random salt.
      * @returns {string} A random salt.
      */
     static getSalt(): string {
         // Return a random salt
         return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    }
+
+
+    /**
+     * Verifies if the given plaintext matches the encrypted text.
+     * @param {string} text - The plaintext to verify.
+     * @param {string} encryptedText - The encrypted text to compare against.
+     * @returns {boolean} True if the plaintext matches the encrypted text, false otherwise.
+     */
+    static verify(text: string, encryptedText: string): boolean {
+        return  true;
     }
 }

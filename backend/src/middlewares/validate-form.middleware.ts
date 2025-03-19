@@ -1,7 +1,7 @@
 import type {Context, Next} from 'hono';
 import {ZodError, ZodSchema} from 'zod';
-import {handleValidationError} from "../utils/validation";
 import {ExceptionModel} from "../models/exception";
+import {ValidationUtils} from "../utils/validation";
 
 /**
  * Middleware to validate input against a Zod schema.
@@ -16,7 +16,7 @@ export const validateFormMiddleware = (schema: ZodSchema) => {
 
             if (!result.success) {
                 // Handle validation errors
-                handleValidationError(result.error);
+                return ValidationUtils.handle(result.error);
             }
 
             // Attach validated data to the request body
@@ -25,7 +25,7 @@ export const validateFormMiddleware = (schema: ZodSchema) => {
         } catch (e) {
 
             if (e instanceof ZodError) {
-                handleValidationError(e);
+                return ValidationUtils.handle(e);
             }
             if (e instanceof ExceptionModel) {
                 throw e;

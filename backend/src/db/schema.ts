@@ -1,6 +1,7 @@
 import {decimal, index, pgTable, text, timestamp, uuid} from 'drizzle-orm/pg-core'
 import * as dotenv from 'dotenv';
 import {drizzle} from 'drizzle-orm/node-postgres';
+import type {InferSelectModel} from "drizzle-orm";
 
 dotenv.config();
 
@@ -23,7 +24,7 @@ export const users = pgTable('users', {
 // Define the logins table schema
 export const logins = pgTable('logins', {
     id: uuid('id').defaultRandom().primaryKey(), // UUID as primary key, generated automatically
-    userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }), // Foreign key referencing the user with ON DELETE CASCADE
+    userId: uuid('user_id').notNull().references(() => users.id, {onDelete: 'cascade'}), // Foreign key referencing the user with ON DELETE CASCADE
     loginTime: timestamp('login_time').defaultNow(), // Timestamp for when the login occurred
     ipAddress: text('ip_address').notNull(), // IP address of the user
     userAgent: text('user_agent').notNull(), // User agent string of the browser/device
@@ -34,7 +35,7 @@ export const logins = pgTable('logins', {
 // Define the wallet table to store user balances
 export const wallets = pgTable('wallets', {
     id: uuid('id').defaultRandom().primaryKey(), // UUID as primary key for wallet
-    userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }), // Foreign key referencing the user with ON DELETE CASCADE
+    userId: uuid('user_id').notNull().references(() => users.id, {onDelete: 'cascade'}), // Foreign key referencing the user with ON DELETE CASCADE
     balance: decimal('balance', {precision: 10, scale: 2}).$type<number>().default(0),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow()
@@ -43,13 +44,15 @@ export const wallets = pgTable('wallets', {
 // Define the transaction table schema
 export const transactions = pgTable('transactions', {
     id: uuid('id').defaultRandom().primaryKey(), // UUID as primary key, generated automatically    username: text('username').notNull().unique(), // Username (must be unique)
-    userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'set null' }), // Link to the user with ON DELETE SET NULL
+    userId: uuid('user_id').notNull().references(() => users.id, {onDelete: 'set null'}), // Link to the user with ON DELETE SET NULL
     amount: decimal('amount', {precision: 10, scale: 2}).$type<number>().default(0),
     type: text('type').notNull(), // Type of transaction (e.g., "top-up", "charge")
     status: text('status').default('pending').notNull(), // Transaction status (default is "pending")
     createdAt: timestamp('created_at').defaultNow(), // Timestamp for when the transaction was created
     updatedAt: timestamp('updated_at').defaultNow(), // Timestamp for when the account was last updated
 })
+
+
 
 const db = drizzle(process.env.DATABASE_URL!);
 
