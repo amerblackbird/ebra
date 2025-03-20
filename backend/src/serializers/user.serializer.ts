@@ -1,5 +1,4 @@
-import type {InferSelectModel} from "drizzle-orm";
-import {users} from "../db/schema";
+import {type UserModel} from "../db/schema";
 
 type UserResponse = {
     id: string;
@@ -9,7 +8,7 @@ type UserResponse = {
     updatedAt: Date | null;
 };
 
-function serializeUser(user: InferSelectModel<typeof users>): UserResponse {
+function serializeUser(user: UserModel): UserResponse {
     return {
         id: user.id,
         name: user.name,

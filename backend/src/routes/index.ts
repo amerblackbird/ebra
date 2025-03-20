@@ -1,6 +1,7 @@
 import {Hono} from "hono";
 import accounts from "./accounts.routes";
 import adminAuth from "./admin-auth.routes";
+import transactions from "./transactions.routes";
 
 const v1 = new Hono();
 
@@ -10,6 +11,7 @@ v1.route('/admin/auth', adminAuth);
 // Accounts apis
 v1.route('/accounts', accounts);
 
-// Wallet apis
+// Transactions apis
+v1.route('/accounts/:id', transactions);
 
 export default v1;

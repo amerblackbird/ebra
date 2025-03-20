@@ -34,11 +34,27 @@ const ERROR_CODES = {
      */
     USER_NOT_FOUND: "USER_NOT_FOUND",
 
+    /**
+     * Wallet not found.
+     */
+    USER_WALLET_NOT_FOUND: "USER_WALLET_NOT_FOUND",
+
 
     /**
      * Unauthorized access.
      */
-    UNAUTHORIZED_ACCESS: "UNAUTHORIZED_ACCESS"
+    UNAUTHORIZED_ACCESS: "UNAUTHORIZED_ACCESS",
+
+
+    /**
+     * Insufficient balance.
+     */
+    INSUFFICIENT_BALANCE: "INSUFFICIENT_BALANCE",
+
+    /**
+     * Invalid amount.
+     */
+    INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR",
 
 }
 

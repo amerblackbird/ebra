@@ -70,6 +70,12 @@ const VALIDATION_ERROR_CODES = {
      */
     [z.ZodIssueCode.not_finite]: "NOT_FINITE",
     INVALID_PASSWORD: "INVALID_PASSWORD",
+
+    /**
+     * The provided ID is invalid
+     */
+    INVALID_ID : "INVALID_ID",
+
     /**
      * The input is invalid.
      */

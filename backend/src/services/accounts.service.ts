@@ -1,7 +1,7 @@
 import {and, eq} from "drizzle-orm";
 
 import type {CreateUserDto} from "../schemas/users.schema";
-import {db, logins, users, wallets} from "../db/schema";
+import {db, logins, type UserModel, users, wallets} from "../db/schema";
 import {PasswordUtils} from "../utils/password";
 import {ExceptionModel} from "../models/exception";
 import ERROR_CODES from "../constants/errors";
@@ -79,7 +79,7 @@ export class AccountsService {
      * @returns The user if found, otherwise undefined.
      */
     async findOneByUsername(username: string) {
-        const existing = await db.select().from(users).where(eq(users.username, username)).execute();
+        const existing = await db.select().from(users).where(eq(users.username, username)).limit(1).execute();
         return existing.length > 0 ? existing[0] : undefined;
     }
 
@@ -90,7 +90,7 @@ export class AccountsService {
      * @returns The user if found, otherwise undefined.
      */
     async findOneByEmailAndRole(email: string, role: string) {
-        const existing = await db.select().from(users).where(and(eq(users.email, email), eq(users.role, role))).execute();
+        const existing = await db.select().from(users).where(and(eq(users.email, email), eq(users.role, role))).limit(1).execute();
         return existing.length > 0 ? existing[0] : undefined;
     }
 
@@ -100,8 +100,12 @@ export class AccountsService {
      * @returns The login details if found, otherwise undefined.
      */
     async findLoginByUserId(userId: string) {
-        const existing = await db.select().from(logins).where(eq(logins.userId, userId)).execute();
+        const existing = await db.select().from(logins).where(eq(logins.userId, userId)).limit(1).execute();
         return existing.length > 0 ? existing[0] : undefined;
     }
 
+    async findOneById(userId: string): Promise<UserModel | undefined> {
+        const existing = await db.select().from(users).where(eq(users.id, userId)).limit(1).execute();
+        return existing.length > 0 ? existing[0] : undefined;
+    }
 }

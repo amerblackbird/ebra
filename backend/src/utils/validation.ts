@@ -8,13 +8,13 @@ export class ValidationUtils {
      * Handles validation errors by throwing an appropriate exception.
      *
      * @param error - The error object to handle.
+     * @param paramName - The name of the parameter that caused the validation error.
      * @throws {ExceptionModel} - Throws an exception with details about the validation error.
      */
-    static handle(error: any) {
+    static handle(error: any, paramName?: string) {
         if (error instanceof ZodError) {
             const invalidFields = error.errors.map(err => {
-
-                const path = err.path.join('.');
+                const path = paramName ?? err.path.join('.');
                 return {
                     field: path,
                     reason: err.message.toLowerCase(),
@@ -41,6 +41,9 @@ export class ValidationUtils {
         // Add custom fields
         if (path == "password" && code == z.ZodIssueCode.invalid_string) {
             return VALIDATION_ERROR_CODES.INVALID_PASSWORD;
+        }
+        if (path == "id" && code == z.ZodIssueCode.invalid_string) {
+            return VALIDATION_ERROR_CODES.INVALID_ID;
         }
         return VALIDATION_ERROR_CODES[code] || "INVALID_INPUT";
     }
