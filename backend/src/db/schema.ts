@@ -12,7 +12,9 @@ export const users = pgTable('users', {
     username: text('username').notNull().unique(), // Username (must be unique)
     role: text('role').default('user').notNull(), // Role with default value 'user'
     createdAt: timestamp('created_at').defaultNow(), // Timestamp for when the account was created
-    updatedAt: timestamp('updated_at').defaultNow(), // Timestamp for when the account was last updated
+    updatedAt: timestamp('updated_at').defaultNow(), // Timestamp for when the account was last updated,
+    createdById: uuid('created_by_id'),
+    updatedById: uuid('updated_by_id'),
 }, (table) => {
     return {
         usernameIndex: index('users_username_idx').on(table.username)
@@ -28,6 +30,8 @@ export const logins = pgTable('logins', {
     userAgent: text('user_agent').notNull(), // User agent string of the browser/device
     password: text('password').notNull(), // Password (hashed)
     salt: text('salt').notNull(), // Salt for the password
+    createdById: uuid('created_by_id').references(() => users.id, {onDelete: 'set null'}),
+    updatedById: uuid('updated_by_id').references(() => users.id, {onDelete: 'set null'}),
 });
 
 // Define the wallet table to store user balances
@@ -36,7 +40,9 @@ export const wallets = pgTable('wallets', {
     userId: uuid('user_id').notNull().references(() => users.id, {onDelete: 'cascade'}), // Foreign key referencing the user with ON DELETE CASCADE
     balance: decimal('balance', {precision: 10, scale: 2}).notNull().$type<number>().default(0),
     createdAt: timestamp('created_at').defaultNow(),
-    updatedAt: timestamp('updated_at').defaultNow()
+    updatedAt: timestamp('updated_at').defaultNow(),
+    createdById: uuid('created_by_id').references(() => users.id, {onDelete: 'set null'}),
+    updatedById: uuid('updated_by_id').references(() => users.id, {onDelete: 'set null'}),
 })
 
 // Define the transaction table schema
@@ -55,6 +61,7 @@ export const transactions = pgTable('transactions', {
 
 
 export type UserModel =  InferSelectModel<typeof users>;
+export type LoginModel =  InferSelectModel<typeof logins>;
 export type WalletModel =  InferSelectModel<typeof wallets>;
 export type TransactionModel =  InferSelectModel<typeof transactions>;
 

@@ -1,6 +1,13 @@
 import {type TransactionModel, type WalletModel} from "../db/schema";
 import {serializeWallet, type WalletResponse} from "./wallet.serializer";
 
+/**
+ * Serializes a transaction object into a TransactionResponse.
+ * @param {TransactionModel} transaction - The transaction object to serialize.
+ * @param {Object} [opts] - Optional parameters.
+ * @param {WalletModel} [opts.wallet] - The wallet object to include in the response.
+ * @returns {TransactionResponse} - The serialized transaction response.
+ */
 type TransactionResponse = {
     id: string;
     userId: string;
@@ -10,9 +17,19 @@ type TransactionResponse = {
     type: string;
     createdAt: Date | null;
     updatedAt: Date | null;
+    createdById: string | null;
+    updatedById: string | null;
     wallet?: WalletResponse;
 };
 
+
+/**
+ * Serializes a transaction object into a TransactionResponse.
+ * @param {TransactionModel} transaction - The transaction object to serialize.
+ * @param {Object} [opts] - Optional parameters.
+ * @param {WalletModel} [opts.wallet] - The wallet object to include in the response.
+ * @returns {TransactionResponse} - The serialized transaction response.
+ */
 function serializeTransaction(transaction: TransactionModel,
                               opts: {
                                   wallet?: WalletModel
@@ -32,7 +49,9 @@ function serializeTransaction(transaction: TransactionModel,
         type: transaction.type,
         createdAt: transaction.createdAt,
         updatedAt: transaction.updatedAt,
-        wallet
+        createdById: transaction.createdById,
+        updatedById: transaction.updatedById,
+        wallet,
     };
 };
 

@@ -10,7 +10,10 @@ export class ExceptionModel extends HTTPException {
 }
 
 export class UnauthorizedException extends ExceptionModel {
-    constructor() {
-        super(ERROR_CODES.UNAUTHORIZED_ACCESS, null, 401);
+    constructor(readonly details?: any) {
+        super(ERROR_CODES.UNAUTHORIZED_ACCESS, {
+            message: 'Unauthorized access',
+            ...(details ?? {})
+        }, 401);
     }
 }

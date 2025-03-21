@@ -46,6 +46,7 @@ const ERROR_CODES = {
     UNAUTHORIZED_ACCESS: "UNAUTHORIZED_ACCESS",
 
 
+
     /**
      * Insufficient balance.
      */
@@ -55,6 +56,12 @@ const ERROR_CODES = {
      * Invalid amount.
      */
     INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR",
+
+
+    /**
+     * Token expired.
+     */
+    TOKEN_EXPIRED: "TOKEN_EXPIRED",
 
 }
 

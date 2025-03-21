@@ -45,11 +45,22 @@ export class JwtUtils {
     }
 
     /**
+     * Checks if a JWT token is expired.
+     * @param token - The JWT token to check.
+     * @returns True if the token is expired, otherwise false.
+     */
+    static isTokenExpired(token: string): boolean {
+        const decoded = jwt.decode(token);
+        const currentTime = dayjs().unix();
+        return decoded.payload.exp !== undefined && decoded.payload.exp < currentTime;
+    }
+
+    /**
      * Verifies a JWT token.
      * @param token - The JWT token to verify.
      * @returns The decoded token payload if verification is successful.
      */
-    static verifyToken(token: string) {
-        return jwt.verify(token, env.SECRET_KEY);
+    static verifyToken(token: string): Promise<any> {
+        return jwt.verify(token, env.SECRET_KEY) ;
     }
 }

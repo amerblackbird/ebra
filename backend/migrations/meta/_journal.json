@@ -57,6 +57,13 @@
       "when": 1742499305995,
       "tag": "0007_wealthy_tempest",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1742531929460,
+      "tag": "0008_empty_vivisector",
+      "breakpoints": true
     }
   ]
 }

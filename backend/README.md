@@ -25,6 +25,7 @@ proper handling of edge cases and attention to detail.
 - **Postgres** as the database with [drizzle-pg](https://orm.drizzle.team/docs/pg)
 - Structured logging with [pino](https://getpino.io/) / [hono-pino](https://www.npmjs.com/package/hono-pino)
 - Date manipulation with [dayjs](https://day.js.org/)
+- Decimal handling with [decimal.js](https://mikemcl.github.io/decimal.js/)
 
 ## Features
 
