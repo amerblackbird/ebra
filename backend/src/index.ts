@@ -1,12 +1,14 @@
 import {serve} from '@hono/node-server'
-import {Hono} from 'hono'
 import {logger} from 'hono/logger';
 import {compress} from 'hono/compress'
 import {rateLimiter} from 'hono-rate-limiter';
-
+import {swaggerUI} from '@hono/swagger-ui'
 import env from "./utils/env";
 import routes from "./routes";
 import {errorHandler} from './utils/errors';
+import {showRoutes} from "hono/dev";
+import ERROR_CODES from "./constants/errors";
+import {Hono} from "hono";
 
 // Load environment variables from the .env file
 
@@ -31,8 +33,23 @@ app.use(
 // Routes and api versioning
 app.route('/api/v1', routes);
 
+
+// Not found handler
+app.notFound((c) => {
+    return c.json({
+        code: ERROR_CODES.NOT_FOUND,
+    })
+})
+
 // Errors handling
 app.onError(errorHandler)
+
+
+// Swagger UI
+app.get('/ui', swaggerUI({url: '/doc'}))
+
+// Show routes
+showRoutes(app);
 
 
 serve({

@@ -63,6 +63,11 @@ const ERROR_CODES = {
      */
     TOKEN_EXPIRED: "TOKEN_EXPIRED",
 
+    /**
+     * Not found.
+     */
+    NOT_FOUND: "NOT_FOUND",
+
 }
 
 export default ERROR_CODES;

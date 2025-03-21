@@ -6,6 +6,8 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.13.8",
+    "@hono/swagger-ui": "^0.5.1",
+    "@hono/zod-openapi": "^0.19.2",
     "dayjs": "^1.11.13",
     "decimal.js": "^10.5.0",
     "dotenv": "^16.4.7",

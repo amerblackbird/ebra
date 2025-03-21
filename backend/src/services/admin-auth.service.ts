@@ -3,6 +3,7 @@ import {ExceptionModel, UnauthorizedException} from "../models/exception";
 import ERROR_CODES from "../constants/errors";
 import {PasswordUtils} from "../utils/password";
 import {JwtUtils} from "../utils/jwt";
+import {serializeUser, type UserResponse} from "../serializers/user.serializer";
 
 
 /**
@@ -27,7 +28,7 @@ export class AdminAuthService {
      * @throws ExceptionModel if the user is not found or credentials are invalid.
      * @throws UnauthorizedException if the user is not an admin or login is not found.
      */
-    async authorize({username, password}: { username: string, password: string }): Promise<{
+    async authorize({username, password}: { username: string, password: string }): Promise<UserResponse & {
         accessToken: string,
         refreshToken: string
     }> {
@@ -54,9 +55,14 @@ export class AdminAuthService {
             throw new ExceptionModel(ERROR_CODES.INVALID_CREDENTIALS)
         }
 
-        return await JwtUtils.generateTokens({
+        const result = await JwtUtils.generateTokens({
             userId: user.id,
             role: user.role
         })
+
+        return {
+            ...serializeUser(user),
+            ...result,
+        };
     }
 }
