@@ -38,6 +38,9 @@ app.route('/api/v1', routes);
 app.notFound((c) => {
     return c.json({
         code: ERROR_CODES.NOT_FOUND,
+        details: {
+            message: 'Not found'
+        }
     })
 })
 

@@ -104,6 +104,8 @@ not start if any required environment variables are missing
 The project is organized as follows:
 
 ```
+├── docs
+│   ├── Ebra.postman_collection.json    # Postman collection for testing the API
 ├── src
 │   ├── controllers
 │   │   └── transactions.controller.ts  # Controller for handling transaction-related requests

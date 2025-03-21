@@ -32,7 +32,9 @@ export class TransactionsService {
         // Find the user account
         const account = await this.accountsService.findOneById(userId);
         if (!account) {
-            throw new ExceptionModel(ERROR_CODES.USER_NOT_FOUND)
+            throw new ExceptionModel(ERROR_CODES.USER_NOT_FOUND, {
+                message: "User not found"
+            })
         }
 
         // Find the user's wallet
@@ -46,6 +48,7 @@ export class TransactionsService {
         // Check if the user has sufficient balance
         if (new Decimal(wallet.balance).lessThan(amount)) {
             throw new ExceptionModel(ERROR_CODES.INSUFFICIENT_BALANCE, {
+                message: "Insufficient balance",
                 balance: new Decimal(wallet.balance).toNumber(),
                 amount: amount,
             })
@@ -114,7 +117,9 @@ export class TransactionsService {
         // Find the user account
         const account = await this.accountsService.findOneById(userId);
         if (!account) {
-            throw new ExceptionModel(ERROR_CODES.USER_NOT_FOUND)
+            throw new ExceptionModel(ERROR_CODES.USER_NOT_FOUND, {
+                message: "User not found"
+            })
         }
 
 

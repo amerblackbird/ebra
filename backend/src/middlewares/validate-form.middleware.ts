@@ -25,6 +25,8 @@ export const validateFormMiddleware = (schema: ZodSchema) => {
             await next();
         } catch (e) {
 
+            console.log(e)
+
             if (e instanceof ZodError) {
                 return ValidationUtils.handle(e);
             }
@@ -32,8 +34,8 @@ export const validateFormMiddleware = (schema: ZodSchema) => {
                 throw e;
             }
             throw new ExceptionModel(ERROR_CODES.INTERNAL_SERVER_ERROR, {
-                message: "Internal Server Error",
-            }, 500);
+                message: (e as Error).message,
+            }, 400);
         }
     };
 };
