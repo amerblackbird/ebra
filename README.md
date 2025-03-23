@@ -8,6 +8,7 @@ This repository contains two main projects:
 ```
 /root-folder
 │── backend/    # Backend service (API)
+│── frontend/   # Frontend e-commerce store
 │── README.md   # Main documentation
 ```
 
@@ -20,6 +21,14 @@ The backend is a REST API built using **Node.js with Hono** and **Drizzle ORM (S
 - Logging with Pino
 
 For more details, visit the **backend/README.md** file.
+
+## Frontend
+The frontend is a simple e-commerce store built with Next.js, TypeScript, and Tailwind CSS, featuring:
+- Product listing using Fake Store API
+- Product detail pages
+- Shopping cart management
+
+For more details, visit **frontend/README.md** file.
 
 ## Setup
 1. Navigate to `backend/`  folder.
