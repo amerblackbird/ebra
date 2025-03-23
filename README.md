@@ -18,7 +18,6 @@ The backend is a REST API built using **Node.js with Hono** and **Drizzle ORM (S
 - Account creation
 - Balance top-ups
 - Balance charges
-- Logging with Pino
 
 For more details, visit the **backend/README.md** file.
 
