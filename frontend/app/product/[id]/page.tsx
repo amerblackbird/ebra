@@ -2,11 +2,11 @@ import * as React from "react"
 
 
 import {ProductModel} from "@/src/models/product";
-import ProductDetail from "@/components/products/product-details";
+import ProductDetail from "@/src/components/products/product-details";
 import {notFound} from "next/navigation";
-import Header from "@/components/header";
+import Header from "@/src/components/header";
 import Link from "next/link";
-import Footer from "@/components/footer";
+import Footer from "@/src/components/footer";
 
 async function getProducts(id: number): Promise<ProductModel> {
     return fetch(

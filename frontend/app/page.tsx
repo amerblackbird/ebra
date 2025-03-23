@@ -1,9 +1,9 @@
 import * as React from "react"
 
-import Header from "@/components/header";
-import Hero from "@/components/hero";
-import Footer from "@/components/footer";
-import Shops from "@/components/shops";
+import Header from "@/src/components/header";
+import Hero from "@/src/components/hero";
+import Footer from "@/src/components/footer";
+import Shops from "@/src/components/shops";
 
 
 export default function ShopPage() {

@@ -5,14 +5,14 @@ import {useCallback} from "react"
 import Link from "next/link"
 import {ShoppingCart} from "lucide-react"
 
-import {Button} from "@/components/ui/button"
-import {RadioGroup, RadioGroupItem} from "@/components/ui/radio-group"
-import {Label} from "@/components/ui/label"
-import {Separator} from "@/components/ui/separator"
-import Header from "@/components/header"
-import Footer from "@/components/footer";
+import {Button} from "@/src/components/ui/button"
+import {RadioGroup, RadioGroupItem} from "@/src/components/ui/radio-group"
+import {Label} from "@/src/components/ui/label"
+import {Separator} from "@/src/components/ui/separator"
+import Header from "@/src/components/header"
+import Footer from "@/src/components/footer";
 import useCartStore from "@/src/stores/cart";
-import CartItem from "@/components/cart/cart-item";
+import CartItem from "@/src/components/cart/cart-item";
 
 
 export default function CartPage() {
