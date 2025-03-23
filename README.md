@@ -3,6 +3,7 @@
 ## Overview
 This repository contains two main projects:
 1. **Backend** - A wallet system API that manages user accounts, transactions, and authentication.
+2. **Frontend** - A simple e-commerce store built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Structure
 ```
